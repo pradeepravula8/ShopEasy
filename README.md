@@ -24,5 +24,5 @@ Welcome to **Shpeasy**, a simple e-commerce platform currently under development
 
 1. Clone the repository:
    bash
-   git clone https://github.com/your-username/shopEasy.git
+   git clone  https://github.com/pradeepravula8/shopEasy.git
    cd shopEasy
