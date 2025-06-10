@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - Online Shopping Site</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-top">
+            <div class="header-main">
+                <div class="logo-container">
+                    <img src="images/SE.png" alt="ShopEasy Logo" class="logo" style="height: 40px; width: auto; vertical-align: middle; display: block;">
+                </div>
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="Search for products, brands and more">
+                    <button class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="header-actions">
+                    <div class="user-section">
+                        <a href="login.html" class="login-btn">Login</a>
+                        <div class="user-menu" style="display:none;">
+                            <a href="profile.html" class="menu-item">Profile</a>
+                            <a href="#" class="menu-item">Saved Credit/Debit Cards</a>
+                            <a href="#" class="menu-item">Select Language</a>
+                            <a href="#" class="menu-item">Notification Settings</a>
+                            <a href="#" class="menu-item">Saved Address</a>
+                            <a href="#" class="menu-item" id="logoutBtn">Logout</a>
+                        </div>
+                    </div>
+                    <div class="cart-container">
+                        <a href="#" class="cart-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Cart</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Categories Navigation -->
+        <nav class="categories-nav">
+            <div class="categories-container">
+                <a href="#" class="category-item" data-category="all">
+                    <img src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/47e5c31ef7dcce1e.png?q=100" alt="All Products">
+                    <span>All Products</span>
+                </a>
+                <a href="#" class="category-item" data-category="electronics">
+                    <img src="https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100" alt="Electronics">
+                    <span>Electronics</span>
+                </a>
+                <a href="#" class="category-item" data-category="fashion">
+                    <img src="https://rukminim1.flixcart.com/flap/128/128/image/82b3ca5fb2301045.png?q=100" alt="Fashion">
+                    <span>Fashion</span>
+                </a>
+                <a href="#" class="category-item" data-category="home">
+                    <img src="https://rukminim1.flixcart.com/flap/128/128/image/ab7e2b022a4587dd.jpg?q=100" alt="Home & Kitchen">
+                    <span>Home & Kitchen</span>
+                </a>
+                <a href="#" class="category-item" data-category="beauty">
+                    <img src="https://rukminim1.flixcart.com/flap/128/128/image/dff3f7adcf3a90c6.png?q=100" alt="Beauty">
+                    <span>Beauty</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Results -->
+    <div id="search-results" class="search-results"></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Main Banner Slider -->
+        <div class="main-banner-slider" id="mainBannerSlider">
+            <button class="main-banner-arrow left" id="mainBannerPrev">&#8249;</button>
+            <img src="https://www.geeky-gadgets.com/wp-content/uploads/2025/01/S25-Edge.webp" alt="Banner Slide" id="mainBannerImg">
+            <button class="main-banner-arrow right" id="mainBannerNext">&#8250;</button>
+        </div>
+
+        <!-- Deals of the Day -->
+        <section class="deals-section">
+            <div class="section-header">
+                <h2>Deals of the Day</h2>
+                <button class="view-all">VIEW ALL</button>
+            </div>
+            <div class="products-slider">
+                <div id="productGrid" class="products-container">
+                    <!-- Products will be dynamically added here -->
+                </div>
+                <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="pagination" id="deals-pagination"></div>
+        </section>
+
+        <!-- Electronics Section -->
+        <section class="deals-section">
+            <div class="section-header">
+                <h2>Best of Electronics</h2>
+                <button class="view-all">VIEW ALL</button>
+            </div>
+            <div class="products-slider">
+                <div id="electronicsGrid" class="products-container">
+                    <!-- Electronics products will be added here -->
+                </div>
+                <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="pagination" id="electronics-pagination"></div>
+        </section>
+
+        <!-- Fashion Section -->
+        <section class="deals-section">
+            <div class="section-header">
+                <h2>Fashion Trending</h2>
+                <button class="view-all">VIEW ALL</button>
+            </div>
+            <div class="products-slider">
+                <div id="fashionGrid" class="products-container">
+                    <!-- Fashion products will be added here -->
+                </div>
+                <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="pagination" id="fashion-pagination"></div>
+        </section>
+
+        <!-- Home & Kitchen Section -->
+        <section class="deals-section">
+            <div class="section-header">
+                <h2>Home & Kitchen Essentials</h2>
+                <button class="view-all">VIEW ALL</button>
+            </div>
+            <div class="products-slider">
+                <div id="homeGrid" class="products-container">
+                    <!-- Home products will be added here -->
+                </div>
+                <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="pagination" id="home-pagination"></div>
+        </section>
+
+        <!-- Beauty Section -->
+        <section class="deals-section">
+            <div class="section-header">
+                <h2>Beauty Picks</h2>
+                <button class="view-all">VIEW ALL</button>
+            </div>
+            <div class="products-slider">
+                <div id="beautyGrid" class="products-container">
+                    <!-- Beauty products will be added here -->
+                </div>
+                <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="pagination" id="beauty-pagination"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>ABOUT</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>HELP</h3>
+                <ul>
+                    <li><a href="#">Payments</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>POLICY</h3>
+                <ul>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Terms Of Use</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>SOCIAL</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Function to show the toast message
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            
+            // Force a reflow
+            toast.offsetHeight;
+            
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 500);
+            }, 3000);
+        }
+
+        // Show account name if logged in, otherwise show Login link
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for toast message in localStorage
+            const storedMessage = localStorage.getItem('toastMessage');
+            if (storedMessage) {
+                // Show toast immediately
+                showToast(storedMessage);
+                localStorage.removeItem('toastMessage');
+            }
+
+            var loginBtn = document.querySelector('.login-btn');
+            var userSection = document.querySelector('.user-section');
+            var userMenu = document.querySelector('.user-menu');
+            var logoutBtn = document.getElementById('logoutBtn');
+            if (!loginBtn) return;
+            var user = localStorage.getItem('user');
+            var isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn && user) {
+                try {
+                    var userObj = JSON.parse(user);
+                    var name = userObj.username || 'Account';
+                    if (name.includes('@')) {
+                        name = name.split('@')[0];
+                    }
+                    name = name.substring(0, 5);
+                    loginBtn.textContent = name;
+                    loginBtn.href = '#';
+                    loginBtn.style.pointerEvents = 'auto';
+                    userSection.addEventListener('mouseenter', function() {
+                        userMenu.style.display = 'block';
+                    });
+                    userSection.addEventListener('mouseleave', function() {
+                        userMenu.style.display = 'none';
+                    });
+                    if (logoutBtn) {
+                        logoutBtn.onclick = function(e) {
+                            e.preventDefault();
+                            localStorage.removeItem('isLoggedIn');
+                            localStorage.removeItem('user');
+                            localStorage.setItem('toastMessage', 'Successfully logged out! See you again soon.');
+                            console.log('Logged out successfully, setting toastMessage:', localStorage.getItem('toastMessage')); // Debug log
+                            location.reload(); // Reload to show message and update UI
+                        };
+                    }
+                } catch (e) {
+                    // fallback: do nothing
+                }
+            } else {
+                loginBtn.textContent = 'Login';
+                loginBtn.href = 'login.html';
+                loginBtn.style.pointerEvents = '';
+                if(userMenu) userMenu.style.display = 'none';
+            }
+        });
+
+        // --- MAIN BANNER SLIDER LOGIC ---
+        const mainBannerSlides = [
+            {
+                src: 'https://www.geeky-gadgets.com/wp-content/uploads/2025/01/S25-Edge.webp',
+                caption: 'Samsung Galaxy S25 Edge - Go live. Get answers. ₹12,223 / Month'
+            },
+            {
+                src: 'https://somnustherapy.com/wp-content/uploads/2021/02/4-Turn-off-electronics-before-bed.jpg',
+                caption: 'Apple MacBook Pro - Power for Pros. Starting at ₹1,19,900'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
+                caption: 'Fashion Sale - Up to 70% Off on Top Brands!'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80',
+                caption: 'Home & Kitchen - Modern Furniture & Decor Deals'
+            },
+            {
+                src: 'https://png.pngtree.com/background/20230414/original/pngtree-makeup-skin-care-products-cosmetics-beauty-photography-advertising-background-picture-image_2424108.jpg',
+                caption: 'Beauty Picks - Skincare, Makeup & More!'
+            }
+        ];
+        let mainBannerIdx = 0;image.png
+        const mainBannerImg = document.getElementById('mainBannerImg');
+        const mainBannerPrev = document.getElementById('mainBannerPrev');
+        const mainBannerNext = document.getElementById('mainBannerNext');
+        let mainBannerTimer;
+
+        function showMainBanner(idx) {
+            mainBannerImg.src = mainBannerSlides[idx].src;
+        }
+        function nextMainBanner() {
+            mainBannerIdx = (mainBannerIdx + 1) % mainBannerSlides.length;
+            showMainBanner(mainBannerIdx);
+        }
+        function prevMainBanner() {i 
+            mainBannerIdx = (mainBannerIdx - 1 + mainBannerSlides.length) % mainBannerSlides.length;
+            showMainBanner(mainBannerIdx);
+        }
+        function startMainBannerAuto() {
+            if (mainBannerTimer) clearInterval(mainBannerTimer);
+            mainBannerTimer = setInterval(nextMainBanner, 3000);
+        }
+        mainBannerPrev.onclick = () => { prevMainBanner(); startMainBannerAuto(); };
+        mainBannerNext.onclick = () => { nextMainBanner(); startMainBannerAuto(); };
+        showMainBanner(mainBannerIdx);
+        startMainBannerAuto();
+    </script>
+</body>
+</html> 
