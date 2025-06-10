@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - ShopEasy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-box">
+            <div class="signup-left">
+                <h1>Looks like you're new here!</h1>
+                <p>Sign up with your mobile number to get started</p>
+            </div>
+            <div class="signup-right">
+                <form id="signupForm" class="signup-form">
+                    <div class="form-group">
+                        <input type="text" id="fullName" placeholder="Enter Full Name" required>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" id="mobile" placeholder="Enter Mobile number" pattern="[0-9]{10}" required>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Enter Email address" required>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder="Enter Password" required>
+                        <div class="error-message"></div>
+                        <div class="password-requirements">
+                            <p>Your password must:</p>
+                            <ul>
+                                <li id="length">Be at least 8 characters</li>
+                                <li id="uppercase">Have at least 1 uppercase letter</li>
+                                <li id="lowercase">Have at least 1 lowercase letter</li>
+                                <li id="number">Have at least 1 number</li>
+                                <li id="special">Have at least 1 special character</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">
+                            I agree to ShopEasy's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="signup-button">CONTINUE</button>
+
+                    <div class="login-link">
+                        <a href="login.html">Existing User? Log in</a>
+                    </div>
+                </form>
+
+                <div class="secure-message">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Your data is securely encrypted</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const fullName = document.getElementById('fullName').value;
+            const mobile = document.getElementById('mobile').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const terms = document.getElementById('terms').checked;
+
+            // Validation
+            let isValid = true;
+            
+            // Name validation
+            if (fullName.trim().length < 3) {
+                showError('fullName', 'Name must be at least 3 characters');
+                isValid = false;
+            }
+
+            // Mobile validation
+            if (!/^[0-9]{10}$/.test(mobile)) {
+                showError('mobile', 'Please enter a valid 10-digit mobile number');
+                isValid = false;
+            }
+
+            // Email validation
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            // Password validation
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                showError('password', 'Password does not meet requirements');
+                isValid = false;
+            }
+
+            // Confirm password
+            if (password !== confirmPassword) {
+                showError('confirmPassword', 'Passwords do not match');
+                isValid = false;
+            }
+
+            // Terms checkbox
+            if (!terms) {
+                alert('Please accept the Terms and Privacy Policy');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Show loading state
+                const submitButton = document.querySelector('.signup-button');
+                submitButton.innerHTML = 'Creating Account...';
+                submitButton.disabled = true;
+
+                // Simulate account creation
+                setTimeout(() => {
+                    // Redirect to login page
+                    window.location.href = 'login.html';
+                }, 2000);
+            }
+        });
+
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorDiv = field.nextElementSibling;
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            field.classList.add('error');
+        }
+
+        // Real-time password validation
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            
+            // Update requirements list
+            document.getElementById('length').classList.toggle('met', password.length >= 8);
+            document.getElementById('uppercase').classList.toggle('met', /[A-Z]/.test(password));
+            document.getElementById('lowercase').classList.toggle('met', /[a-z]/.test(password));
+            document.getElementById('number').classList.toggle('met', /\d/.test(password));
+            document.getElementById('special').classList.toggle('met', /[@$!%*?&]/.test(password));
+        });
+
+        // Clear errors when input changes
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorDiv = this.nextElementSibling;
+                if (errorDiv.classList.contains('error-message')) {
+                    errorDiv.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
