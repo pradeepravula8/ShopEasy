@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ShopEasy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: block;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+        .google-login-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            padding: 12px 0;
+            background: #fafbfc;
+            border: 1.5px solid #e3e6ef;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: none;
+            outline: none;
+            margin-top: 18px;
+        }
+        .google-login-btn:hover {
+            background: #f1f3f6;
+        }
+        .google-logo {
+            width: 28px;
+            height: 28px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <div class="login-wrapper">
+        <div class="logo-side">
+            <img src="images/SE.png" alt="ShopEasy Logo">
+        </div>
+        <div class="login-container">
+            <h2>Login</h2>
+            <form class="login-form" id="loginForm">
+                <input type="text" id="username" placeholder="Enter Email or Mobile number" required>
+                <div class="password-container" style="position:relative;width:100%;">
+                    <input type="password" id="password" placeholder="Enter Password" required style="padding-right:36px;width:100%;box-sizing:border-box;">
+                    <span id="togglePassword" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;font-size:16px;line-height:1;height:20px;width:20px;display:flex;align-items:center;justify-content:center;background:transparent;">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <div class="forgot-password" style="text-align:right;margin-top:-10px;margin-bottom:8px;">
+                    <a href="#" id="forgotPasswordLink" style="color:#2874f0;font-size:14px;text-decoration:none;">Forgot Password?</a>
+                </div>
+                <div class="error" id="loginError"></div>
+                <button type="submit">Login</button>
+            </form>
+            <!-- Google Sign-In Button -->
+            <div id="g_id_onload"
+                data-client_id="REPLACE_WITH_YOUR_GOOGLE_CLIENT_ID"
+                data-callback="handleCredentialResponse"
+                data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin" data-type="standard" style="width:100%;margin-top:18px;"></div>
+        </div>
+    </div>
+    <script>
+        // Function to show toast message
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Password validation function
+        function isPasswordSecure(password) {
+            // At least 6 chars, 1 number, 1 special char, 1 uppercase, 1 lowercase
+            return password.length >= 6 &&
+                /[0-9]/.test(password) &&
+                /[!@#$%^&*(),.?":{}|<>]/.test(password) &&
+                /[A-Z]/.test(password) &&
+                /[a-z]/.test(password);
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorDiv = document.getElementById('loginError');
+            errorDiv.textContent = '';
+            
+            console.log('Login attempt with:', { username, password });
+            
+            if (!username || !password) {
+                errorDiv.textContent = 'Please enter both fields.';
+                return;
+            }
+            if (username.length < 5) {
+                errorDiv.textContent = 'Username must be at least 5 characters.';
+                return;
+            }
+            
+            // Debug password validation
+            const hasLength = password.length >= 6;
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            
+            console.log('Password validation:', {
+                hasLength,
+                hasNumber,
+                hasSpecial,
+                hasUpper,
+                hasLower
+            });
+            
+            if (!isPasswordSecure(password)) {
+                errorDiv.textContent = 'Password must be at least 6 characters and include numbers, special characters, uppercase and lowercase letters.';
+                return;
+            }
+
+            // Store login success message in localStorage
+            localStorage.setItem('toastMessage', 'Successfully logged in! Welcome back.');
+            console.log('Setting toast message:', localStorage.getItem('toastMessage')); // Debug log
+            
+            // Simulate login success (replace with real auth if needed)
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('user', JSON.stringify({ username }));
+
+            // Redirect to main page
+            window.location.href = 'index.html';
+        });
+
+        // Password visibility toggle
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Forgot password link handler
+        document.getElementById('forgotPasswordLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            showToast('Password reset functionality coming soon!');
+        });
+
+        // Google Sign-In callback
+        function handleCredentialResponse(response) {
+            // This is a JWT token from Google
+            // You should send this token to your backend for verification and login
+            console.log("Encoded JWT ID token: " + response.credential);
+            showToast('Google login successful! (Token in console)');
+            // Example: send to backend
+            // fetch('/api/google-login', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ token: response.credential })
+            // }).then(...)
+        }
+    </script>
+</body>
+</html> 
