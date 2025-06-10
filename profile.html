@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - ShopEasy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .profile-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            min-height: 600px;
+        }
+        .sidebar {
+            width: 270px;
+            background: #f7f9fa;
+            border-right: 1px solid #e3e6ef;
+            padding: 32px 0 0 0;
+            border-radius: 8px 0 0 8px;
+        }
+        .sidebar .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 0 32px 32px 32px;
+            border-bottom: 1px solid #e3e6ef;
+        }
+        .sidebar .profile-header img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #e3e6ef;
+        }
+        .sidebar .profile-header .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212121;
+        }
+        .sidebar nav {
+            margin-top: 32px;
+        }
+        .sidebar nav a {
+            display: block;
+            padding: 14px 32px;
+            color: #2874f0;
+            font-weight: 500;
+            text-decoration: none;
+            border-left: 4px solid transparent;
+            transition: background 0.2s, border 0.2s;
+        }
+        .sidebar nav a.active, .sidebar nav a:hover {
+            background: #e3e6ef;
+            border-left: 4px solid #2874f0;
+            color: #1856a7;
+        }
+        .profile-content {
+            flex: 1;
+            padding: 48px 56px;
+        }
+        .profile-section {
+            margin-bottom: 40px;
+        }
+        .profile-section h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #212121;
+        }
+        .profile-info-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 18px;
+        }
+        .profile-info-label {
+            width: 160px;
+            color: #878787;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .profile-info-value {
+            font-size: 16px;
+            color: #212121;
+            font-weight: 400;
+        }
+        .edit-link {
+            color: #2874f0;
+            font-size: 14px;
+            margin-left: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .edit-link:hover {
+            text-decoration: underline;
+        }
+        .faq-section {
+            margin-top: 48px;
+        }
+        .faq-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .faq-section p {
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 8px;
+        }
+        @media (max-width: 900px) {
+            .profile-container { flex-direction: column; }
+            .sidebar { width: 100%; border-radius: 8px 8px 0 0; }
+            .profile-content { padding: 32px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <aside class="sidebar">
+            <div class="profile-header">
+                <img id="profile-avatar" src="images/avatar.png" alt="Profile Picture">
+                <div>
+                    <div class="profile-name" id="profile-shortname">Name</div>
+                    <div id="debug-shortname" style="color:red;font-size:12px;"></div>
+                    <div style="font-size:13px;color:#878787;">Hello,</div>
+                </div>
+            </div>
+            <nav>
+                <a href="#" class="active">Profile Information</a>
+                <a href="#">Manage Addresses</a>
+                <a href="#">PAN Card Information</a>
+                <a href="#">Gift Cards</a>
+                <a href="#">Saved UPI</a>
+                <a href="#">Saved Cards</a>
+                <a href="#">My Coupons</a>
+            </nav>
+        </aside>
+        <main class="profile-content">
+            <section class="profile-section">
+                <h2>Personal Information <a class="edit-link" href="#">Edit</a></h2>
+                <div class="profile-info-row">
+                    <div class="profile-info-label">Name</div>
+                    <div class="profile-info-value" id="profile-info-name">Pradeep Ravula</div>
+                </div>
+                <div class="profile-info-row">
+                    <div class="profile-info-label">Gender</div>
+                    <div class="profile-info-value">Male</div>
+                </div>
+            </section>
+            <section class="profile-section">
+                <h2>Email Address <a class="edit-link" href="#">Edit</a></h2>
+                <div class="profile-info-row">
+                    <div class="profile-info-label">Email</div>
+                    <div class="profile-info-value" id="profile-info-email">pradeep@example.com</div>
+                </div>
+            </section>
+            <section class="profile-section">
+                <h2>Mobile Number <a class="edit-link" href="#">Edit</a></h2>
+                <div class="profile-info-row">
+                    <div class="profile-info-label">Mobile</div>
+                    <div class="profile-info-value">+91 6303891189</div>
+                </div>
+            </section>
+            <section class="faq-section">
+                <h3>FAQs</h3>
+                <p><b>What happens when I update my email address (or mobile number)?</b></p>
+                <p>Your login email id (or mobile number) changes, likewise. You'll receive all your account related communication on your updated email address (or mobile number).</p>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var user = localStorage.getItem('user');
+            var shortName = 'Guest';
+            var debugMsg = '';
+            if (user) {
+                try {
+                    var userObj = JSON.parse(user);
+                    // Use username or fallback to email
+                    var name = userObj.username || userObj.email || '';
+                    document.getElementById('profile-username').textContent = name || 'No Name';
+                    document.getElementById('profile-info-name').textContent = name || 'No Name';
+                    // Guess name logic
+                    if (name) {
+                        var guess = name;
+                        if (name.includes('@')) {
+                            guess = name.split('@')[0];
+                            debugMsg = 'Before @: ' + guess;
+                        }
+                        // Split by number or period
+                        var parts = guess.split(/\d+|\./).filter(Boolean);
+                        debugMsg += ' | Split: ' + JSON.stringify(parts);
+                        if (parts.length > 0) {
+                            // Pick the first meaningful word (letters only, min 2 chars)
+                            var firstWord = parts.find(w => /^[a-zA-Z]{2,}$/.test(w));
+                            if (firstWord) {
+                                shortName = firstWord;
+                                debugMsg += ' | First word: ' + firstWord;
+                            } else {
+                                shortName = parts[0];
+                                debugMsg += ' | Fallback to first part: ' + parts[0];
+                            }
+                        } else {
+                            shortName = guess.substring(0, 5);
+                            debugMsg += ' | Fallback to first 5 chars: ' + shortName;
+                        }
+                    } else {
+                        debugMsg = 'No username or email found.';
+                    }
+                    // Show only first 5 characters of email if available
+                    if (userObj.email) {
+                        document.getElementById('profile-info-email').textContent = userObj.email.substring(0, 5);
+                    }
+                    // Always show the sample avatar
+                    document.getElementById('profile-avatar').src = 'images/avatar.png';
+                } catch (e) {
+                    shortName = 'Error';
+                    debugMsg = 'Error parsing user: ' + e;
+                    document.getElementById('profile-username').textContent = 'Error';
+                    document.getElementById('profile-info-name').textContent = 'Error';
+                    document.getElementById('profile-info-email').textContent = 'Error';
+                }
+            } else {
+                debugMsg = 'No user in localStorage.';
+            }
+            document.getElementById('profile-shortname').textContent = shortName;
+            document.getElementById('debug-shortname').textContent = debugMsg;
+            // Debug output
+            console.log('User for shortcut:', user, 'Shortname:', shortName, 'Debug:', debugMsg);
+        });
+    </script>
+</body>
+</html> 
