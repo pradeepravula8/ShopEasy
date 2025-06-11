@@ -80,13 +80,25 @@
                 <div class="error" id="loginError"></div>
                 <button type="submit">Login</button>
             </form>
+            
             <!-- Google Sign-In Button -->
             <div id="g_id_onload"
-                data-client_id="REPLACE_WITH_YOUR_GOOGLE_CLIENT_ID"
+                data-client_id="657192570939-j110pe09njht57dh5qofmcl53sfffn40.apps.googleusercontent.com"
+                data-context="signin"
+                data-ux_mode="popup"
                 data-callback="handleCredentialResponse"
                 data-auto_prompt="false">
             </div>
-            <div class="g_id_signin" data-type="standard" style="width:100%;margin-top:18px;"></div>
+            <div class="g_id_signin"
+                data-type="standard"
+                data-shape="rectangular"
+                data-theme="outline"
+                data-text="signin_with"
+                data-size="large"
+                data-logo_alignment="left"
+                data-width="100%"
+                style="margin-top: 20px;">
+            </div>
         </div>
     </div>
     <script>
@@ -184,17 +196,37 @@
 
         // Google Sign-In callback
         function handleCredentialResponse(response) {
-            // This is a JWT token from Google
-            // You should send this token to your backend for verification and login
-            console.log("Encoded JWT ID token: " + response.credential);
-            showToast('Google login successful! (Token in console)');
-            // Example: send to backend
-            // fetch('/api/google-login', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ token: response.credential })
-            // }).then(...)
+            // Decode the JWT token
+            const responsePayload = jwt_decode(response.credential);
+            
+            console.log("Google Sign-In Response:", responsePayload);
+            
+            // Store user information
+            const userData = {
+                username: responsePayload.email,
+                name: responsePayload.name,
+                picture: responsePayload.picture,
+                email: responsePayload.email
+            };
+            
+            // Store login success message
+            localStorage.setItem('toastMessage', 'Successfully logged in with Google! Welcome ' + userData.name);
+            
+            // Set login state
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('user', JSON.stringify(userData));
+            
+            // Show success message
+            showToast('Successfully logged in with Google!');
+            
+            // Redirect to main page
+            window.location.href = 'index.html';
         }
+
+        // Add JWT decode library
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js';
+        document.head.appendChild(script);
     </script>
 </body>
 </html> 
