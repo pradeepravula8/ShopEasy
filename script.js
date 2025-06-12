@@ -5,6 +5,172 @@ let products = [];
 let currentPage = 1;
 const productsPerPage = 20;
 
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - Initializing script.js');
+    // Profile related logic
+    var user = localStorage.getItem('user');
+    var shortName = 'Guest';
+    var debugMsg = '';
+
+    if (user) {
+        try {
+            var userObj = JSON.parse(user);
+
+            // Determine the name to be displayed in the profile fields
+            let displayName = '';
+            if (userObj.username && !userObj.username.includes('@')) {
+                displayName = userObj.username;
+            } else if (userObj.fullName && !userObj.fullName.includes('@')) {
+                displayName = userObj.fullName;
+            } else if (userObj.email) {
+                // If only email is available, use the part before @ for display name as a fallback
+                displayName = userObj.email.split('@')[0];
+            }
+
+            const firstNameInput = document.getElementById('first-name');
+            const lastNameInput = document.getElementById('last-name');
+            const emailAddressInput = document.getElementById('email-address');
+            const mobileNumberInput = document.getElementById('mobile-number');
+
+            if (firstNameInput) firstNameInput.value = displayName.split(' ')[0] || '';
+            if (lastNameInput) lastNameInput.value = displayName.split(' ')[1] || '';
+            if (emailAddressInput && userObj.email) emailAddressInput.value = userObj.email;
+            if (mobileNumberInput && userObj.phone) mobileNumberInput.value = userObj.phone;
+
+            // Determine the short name for the greeting
+            if (userObj.username) {
+                if (userObj.username.includes('@')) {
+                    shortName = userObj.username.split('@')[0];
+                } else {
+                    shortName = userObj.username.split(' ')[0];
+                }
+            } else if (userObj.email) {
+                shortName = userObj.email.split('@')[0];
+            }
+            shortName = shortName.trim();
+            if (shortName.length === 0) {
+                shortName = 'Guest';
+            }
+
+            document.getElementById('profile-avatar').src = 'images/avatar.png';
+
+        } catch (e) {
+            shortName = 'Error';
+            debugMsg = 'Error parsing user: ' + e;
+            const inputs = ['first-name', 'last-name', 'email-address', 'mobile-number'];
+            inputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) input.value = 'Error';
+            });
+        }
+    } else {
+        debugMsg = 'No user in localStorage.';
+    }
+    
+    const profileShortname = document.getElementById('profile-shortname');
+    const debugShortname = document.getElementById('debug-shortname');
+
+    if (profileShortname) profileShortname.textContent = shortName;
+    if (debugShortname) debugShortname.textContent = debugMsg;
+
+    console.log('User for shortcut:', user, 'Shortname:', shortName, 'Debug:', debugMsg);
+
+    // Profile sidebar navigation logic
+    const profileNavLinks = document.querySelectorAll('.sidebar nav a');
+    console.log('Found profile navigation links:', profileNavLinks);
+    const profileSections = document.querySelectorAll('.profile-content section');
+    console.log('Found profile content sections:', profileSections);
+
+    function showProfileSection(targetId) {
+        console.log('Attempting to show section:', targetId);
+        profileSections.forEach(section => {
+            section.style.display = 'none';
+        });
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.style.display = 'block';
+            console.log('Successfully set display to block for:', targetId);
+        } else {
+            console.error('Target section not found:', targetId);
+        }
+    }
+
+    profileNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Sidebar link clicked:', this.getAttribute('data-target'));
+            profileNavLinks.forEach(navLink => navLink.classList.remove('active'));
+            this.classList.add('active');
+            const targetId = this.getAttribute('data-target');
+            if (targetId) {
+                showProfileSection(targetId);
+            }
+        });
+    });
+
+    // Ensure the initial active section is displayed on load
+    const initialActiveLink = document.querySelector('.sidebar nav a.active');
+    if (initialActiveLink) {
+        const initialTargetId = initialActiveLink.getAttribute('data-target');
+        console.log('Initial active link target:', initialTargetId);
+        if (initialTargetId) {
+            showProfileSection(initialTargetId);
+        }
+    }
+
+    // Product related logic
+    fetchProducts();
+    
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', searchProducts);
+    }
+
+    const categoryLinks = document.querySelectorAll('.category-item');
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const category = link.getAttribute('data-category');
+            filterProductsByCategory(category);
+        });
+    });
+
+    // Address form logic
+    const addNewAddressBtn = document.getElementById('add-new-address-btn');
+    const newAddressForm = document.getElementById('new-address-form');
+    const cancelAddressBtn = document.getElementById('cancel-address-btn');
+    const addressListDiv = document.querySelector('.address-list');
+
+    // Load addresses on page load
+    displayAddresses();
+
+    if (addNewAddressBtn && newAddressForm) {
+        addNewAddressBtn.addEventListener('click', function() {
+            newAddressForm.style.display = 'block';
+            addNewAddressBtn.style.display = 'none'; // Hide the add button when form is visible
+        });
+    }
+
+    if (cancelAddressBtn && newAddressForm && addNewAddressBtn) {
+        cancelAddressBtn.addEventListener('click', function() {
+            newAddressForm.style.display = 'none';
+            addNewAddressBtn.style.display = 'block'; // Show the add button when form is hidden
+            clearAddressForm();
+        });
+    }
+
+    console.log('Attempting to find Save Address Button...');
+    const saveAddressBtn = document.querySelector('.save-address-btn');
+    console.log('Save Address Button Element found:', saveAddressBtn);
+    if (saveAddressBtn) {
+        console.log('Attaching click listener to Save Address Button.');
+        saveAddressBtn.addEventListener('click', saveAddress);
+    } else {
+        console.error('Error: Save Address Button element with class \'save-address-btn\' not found.');
+    }
+
+});
+
 // Fetch products from API with loading state
 async function fetchProducts() {
     try {
@@ -248,110 +414,145 @@ function searchProducts() {
         product.description.toLowerCase().includes(searchTerm) ||
         product.category.toLowerCase().includes(searchTerm)
     );
-
-    const searchResultsContainer = document.getElementById('search-results');
-    if (searchResultsContainer) {
-        searchResultsContainer.innerHTML = '';
-        if (searchResults.length > 0) {
-            searchResults.forEach(product => {
-                const resultItem = document.createElement('div');
-                resultItem.className = 'search-result-item';
-                resultItem.innerHTML = `
-                    <img src="${product.image}" alt="${product.title}">
-                    <div class="search-result-info">
-                        <h3>${product.title}</h3>
-                        <div class="price">₹${product.price.toLocaleString('en-IN')}</div>
-                    </div>
-                `;
-                resultItem.onclick = () => addToCart(product.id);
-                searchResultsContainer.appendChild(resultItem);
-            });
-        } else {
-            searchResultsContainer.innerHTML = '<p>No products found</p>';
-        }
-    }
+    displayProductsByCategory('productGrid', searchResults);
+    displayProductsByCategory('electronicsGrid', searchResults);
+    displayProductsByCategory('fashionGrid', searchResults);
+    displayProductsByCategory('homeGrid', searchResults);
 }
 
 // Show notification
 function showNotification(message, type = 'error') {
+    const notificationContainer = document.getElementById('notification-container');
+    if (!notificationContainer) return;
+
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.textContent = message;
-    document.body.appendChild(notification);
+    notificationContainer.appendChild(notification);
 
     setTimeout(() => {
-        notification.remove();
+        notification.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+        notification.addEventListener('transitionend', () => notification.remove(), { once: true });
     }, 3000);
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    fetchProducts();
-    
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', searchProducts);
-    }
-
-    // Add category click handlers
-    const categoryLinks = document.querySelectorAll('.category-item');
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const category = link.getAttribute('data-category');
-            filterProductsByCategory(category);
-        });
-    });
-});
-
 // Filter products by category
 function filterProductsByCategory(category) {
-    // Hide all product sections
-    document.querySelectorAll('.deals-section').forEach(section => {
-        section.style.display = 'none';
+    const allProductContainers = document.querySelectorAll('.products-container');
+    allProductContainers.forEach(container => {
+        if (container.id !== 'productGrid') {
+            container.style.display = 'none';
+        }
     });
-
-    // Show the selected category section
-    let targetSection;
-    switch(category) {
-        case 'all':
-            targetSection = document.getElementById('productGrid');
-            document.querySelector('.deals-section:nth-child(1)').style.display = 'block';
-            break;
-        case 'electronics':
-            targetSection = document.getElementById('electronicsGrid');
-            document.querySelector('.deals-section:nth-child(2)').style.display = 'block';
-            break;
-        case 'fashion':
-            targetSection = document.getElementById('fashionGrid');
-            document.querySelector('.deals-section:nth-child(3)').style.display = 'block';
-            break;
-        case 'home':
-            targetSection = document.getElementById('homeGrid');
-            document.querySelector('.deals-section:nth-child(4)').style.display = 'block';
-            break;
-        case 'beauty':
-            // For beauty category, we'll show all products and filter them
-            targetSection = document.getElementById('productGrid');
-            document.querySelector('.deals-section:nth-child(1)').style.display = 'block';
-            break;
-    }
-
-    // Reset to first page
-    currentPage = 1;
-
-    // Update the display
-    if (category === 'beauty') {
-        const beautyProducts = products.filter(product => 
-            product.category.toLowerCase().includes('beauty') || 
-            product.category.toLowerCase().includes('skincare') ||
-            product.category.toLowerCase().includes('fragrances')
-        );
-        displayProductsByCategory('productGrid', beautyProducts);
+    if (category === 'all') {
+        document.getElementById('productGrid').style.display = 'grid';
+        document.getElementById('electronicsGrid').style.display = 'grid';
+        document.getElementById('fashionGrid').style.display = 'grid';
+        document.getElementById('homeGrid').style.display = 'grid';
     } else {
-        displayProductsByCategory(targetSection.id, products);
+        if (category === 'electronics') {
+            document.getElementById('electronicsGrid').style.display = 'grid';
+        } else if (category === 'fashion') {
+            document.getElementById('fashionGrid').style.display = 'grid';
+        } else if (category === 'home') {
+            document.getElementById('homeGrid').style.display = 'grid';
+        }
+    }
+}
+
+// Function to clear address form fields
+function clearAddressForm() {
+    document.getElementById('fullName').value = '';
+    document.getElementById('mobileNumber').value = '';
+    document.getElementById('pinCode').value = '';
+    document.getElementById('address').value = '';
+    document.getElementById('locality').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('state').value = '';
+    const radioButtons = document.getElementsByName('addressType');
+    radioButtons.forEach(radio => radio.checked = false);
+}
+
+// Function to save a new address
+function saveAddress() {
+    const fullName = document.getElementById('fullName').value;
+    const mobileNumber = document.getElementById('mobileNumber').value;
+    const pinCode = document.getElementById('pinCode').value;
+    const address = document.getElementById('address').value;
+    const locality = document.getElementById('locality').value;
+    const city = document.getElementById('city').value;
+    const state = document.getElementById('state').value;
+    const addressType = document.querySelector('input[name="addressType"]:checked');
+
+    console.log("Attempting to save address...");
+    console.log("Full Name:", fullName);
+    console.log("Mobile Number:", mobileNumber);
+    console.log("Pincode:", pinCode);
+    console.log("Address:", address);
+    console.log("Locality:", locality);
+    console.log("City:", city);
+    console.log("State:", state);
+    console.log("Address Type:", addressType ? addressType.value : 'None selected');
+
+    if (!fullName || !mobileNumber || !pinCode || !address || !locality || !city || !state || !addressType) {
+        showNotification('Please fill in all address fields and select an address type.', 'error');
+        console.error("Validation failed: One or more fields are empty.");
+        return;
     }
 
-    // Scroll to the section
-    targetSection.scrollIntoView({ behavior: 'smooth' });
+    const newAddress = {
+        fullName,
+        mobileNumber,
+        pinCode,
+        address,
+        locality,
+        city,
+        state,
+        type: addressType.value
+    };
+
+    let savedAddresses = JSON.parse(localStorage.getItem('addresses')) || [];
+    console.log("Current saved addresses before adding:", savedAddresses);
+    savedAddresses.push(newAddress);
+    localStorage.setItem('addresses', JSON.stringify(savedAddresses));
+    console.log("Saved addresses after adding:", JSON.parse(localStorage.getItem('addresses')));
+
+    showNotification('Address saved successfully!', 'success');
+    clearAddressForm();
+    document.getElementById('new-address-form').style.display = 'none';
+    document.getElementById('add-new-address-btn').style.display = 'block';
+    displayAddresses(); // Refresh the list of addresses
+}
+
+// Function to display saved addresses
+function displayAddresses() {
+    const addressListDiv = document.querySelector('.address-list');
+    let savedAddresses = JSON.parse(localStorage.getItem('addresses')) || [];
+
+    if (addressListDiv) {
+        addressListDiv.innerHTML = ''; // Clear current list
+        if (savedAddresses.length === 0) {
+            addressListDiv.innerHTML = '<p>No addresses saved. Add a new address to get started!</p>';
+        } else {
+            savedAddresses.forEach((addr, index) => {
+                const addressCard = document.createElement('div');
+                addressCard.className = 'address-card';
+                addressCard.innerHTML = `
+                    <h3>${addr.fullName} (${addr.type})</h3>
+                    <p>${addr.address}, ${addr.locality}</p>
+                    <p>${addr.city}, ${addr.state} - ${addr.pinCode}</p>
+                    <p>Mobile: ${addr.mobileNumber}</p>
+                    <div class="address-actions">
+                        <button class="edit-address-btn" data-index="${index}">Edit</button>
+                        <button class="delete-address-btn" data-index="${index}">Delete</button>
+                    </div>
+                `;
+                addressListDiv.appendChild(addressCard);
+            });
+        }
+    }
 } 
