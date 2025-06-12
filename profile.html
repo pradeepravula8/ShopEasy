@@ -42,6 +42,12 @@
             font-weight: 600;
             color: #212121;
         }
+        /* Styling for the greeting username */
+        #greeting-username {
+            font-size: 1.2em; /* Increase font size */
+            font-weight: bold; /* Make it bold */
+            color: #212121; /* Ensure good visibility */
+        }
         .sidebar nav {
             margin-top: 32px;
         }
@@ -116,121 +122,986 @@
             .sidebar { width: 100%; border-radius: 8px 8px 0 0; }
             .profile-content { padding: 32px 16px; }
         }
+        .address-item {
+            border: 1px solid #e3e6ef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .address-item h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #212121;
+        }
+        .address-item p {
+            margin-bottom: 5px;
+            font-size: 15px;
+            color: #444;
+        }
+        .address-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        .address-actions button {
+            background: none;
+            border: none;
+            color: #2874f0;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+            transition: color 0.2s;
+        }
+        .address-actions button:hover {
+            text-decoration: underline;
+            color: #1856a7;
+        }
+        .new-address-form {
+            background: #f7f9fa;
+            border: 1px solid #e3e6ef;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d0d2d7;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #333;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+        }
+        .radio-group label {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        .save-address-btn,
+        .cancel-address-btn,
+        .add-new-address-btn {
+            background-color: #2874f0;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+        }
+        .cancel-address-btn {
+            background-color: #6c757d;
+            margin-left: 15px;
+        }
+        .save-address-btn:hover {
+            background-color: #1856a7;
+        }
+        .cancel-address-btn:hover {
+            background-color: #5a6268;
+        }
+        .add-new-address-btn i {
+            margin-right: 8px;
+        }
+
+        /* Gift Card Specific Styles */
+        .gift-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .gift-card-header h3 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .gift-card-header .header-links a {
+            color: #2874f0;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 14px;
+        }
+
+        .gift-card-header .header-links a:hover {
+            text-decoration: underline;
+        }
+
+        .add-gift-card-section {
+            margin-bottom: 30px;
+        }
+
+        .add-gift-card-btn {
+            background-color: #2874f0;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .add-gift-card-btn:hover {
+            background-color: #1856a7;
+        }
+
+        .add-gift-card-btn i {
+            margin-right: 8px;
+        }
+
+        .buy-gift-card-section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .buy-gift-card-section h3 .issued-by {
+            font-size: 14px;
+            font-weight: 400;
+            color: #878787;
+            margin-left: 15px;
+        }
+
+        .buy-gift-card-section h3 .issued-by a {
+            color: #2874f0;
+            text-decoration: none;
+        }
+
+        .gift-card-content {
+            display: flex;
+            gap: 40px;
+        }
+
+        .gift-card-form {
+            flex: 2;
+        }
+
+        .gift-card-preview {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .gift-card-image {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .gift-card-image img {
+            width: 100%;
+            display: block;
+        }
+
+        .gift-card-value {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .gift-card-logo {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .tab-navigation {
+            display: flex;
+            border-bottom: 1px solid #e3e6ef;
+            margin-bottom: 20px;
+        }
+
+        .tab-navigation .tab-link {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab-navigation .tab-link.active {
+            color: #2874f0;
+            border-bottom-color: #2874f0;
+        }
+
+        .tab-navigation .tab-link:hover {
+            color: #2874f0;
+        }
+
+        .form-group.half-width {
+            width: calc(50% - 10px);
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 20px;
+        }
+
+        .form-group.half-width:last-child {
+            margin-right: 0;
+        }
+
+        .buy-another-gift-card-btn {
+            background: none;
+            border: none;
+            color: #2874f0;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 10px 0;
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+        .buy-another-gift-card-btn i {
+            margin-right: 8px;
+        }
+
+        .buy-gift-card-for-btn {
+            background-color: #fb641b;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 30px;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+
+        .buy-gift-card-for-btn:hover {
+            background-color: #e55a17;
+        }
     </style>
 </head>
 <body>
     <div class="profile-container">
         <aside class="sidebar">
             <div class="profile-header">
-                <img id="profile-avatar" src="images/avatar.png" alt="Profile Picture">
+                <img id="profile-avatar" src="images/login.png" alt="Profile Avatar">
                 <div>
-                    <div class="profile-name" id="profile-shortname">Name</div>
-                    <div id="debug-shortname" style="color:red;font-size:12px;"></div>
-                    <div style="font-size:13px;color:#878787;">Hello,</div>
+                    <div style="font-size:13px;color:#878787;">Hello, <span id="greeting-username">Pradeep</span></div>
                 </div>
             </div>
             <nav>
-                <a href="#" class="active">Profile Information</a>
-                <a href="#">Manage Addresses</a>
-                <a href="#">PAN Card Information</a>
-                <a href="#">Gift Cards</a>
-                <a href="#">Saved UPI</a>
-                <a href="#">Saved Cards</a>
-                <a href="#">My Coupons</a>
+                <div class="nav-section-title"><i class="fas fa-box"></i> MY ORDERS</div>
+                <a href="#" data-target="my-orders-section">My Orders</a>
+                <div class="nav-section-title"><i class="fas fa-cog"></i> ACCOUNT SETTINGS</div>
+                <a href="#" class="active" data-target="profile-info-section">Profile Information</a>
+                <a href="#" data-target="manage-addresses-section">Manage Addresses</a>
+                <a href="#" data-target="pan-card-section">PAN Card Information</a>
+                <div class="nav-section-title"><i class="fas fa-wallet"></i> PAYMENTS</div>
+                <a href="#" data-target="gift-cards-section">Gift Cards <span class="gift-card-count">20</span></a>
+                <a href="#" data-target="saved-upi-section">Saved UPI</a>
+                <a href="#" data-target="saved-cards-section">Saved Cards</a>
+                <div class="nav-section-title"><i class="fas fa-briefcase"></i> MY STUFF</div>
+                <a href="#" data-target="my-coupons-section">My Coupons</a>
+                <a href="#" data-target="my-reviews-ratings-section">My Reviews & Ratings</a>
+                <a href="#" data-target="all-notifications-section">All Notifications</a>
+                <a href="#" data-target="my-wishlist-section">My Wishlist</a>
+                <a href="#" data-target="logout-section"><i class="fas fa-power-off"></i> Logout</a>
             </nav>
         </aside>
         <main class="profile-content">
-            <section class="profile-section">
-                <h2>Personal Information <a class="edit-link" href="#">Edit</a></h2>
-                <div class="profile-info-row">
-                    <div class="profile-info-label">Name</div>
-                    <div class="profile-info-value" id="profile-info-name">Pradeep Ravula</div>
+            <section class="profile-section" id="my-orders-section" style="display:none;">
+                <h2>My Orders</h2>
+                <p>You have no orders yet.</p>
+            </section>
+            <section class="profile-section" id="profile-info-section">
+                <h2>Personal Information <a class="edit-link" href="#" data-section="personal-info">Edit</a></h2>
+                <div id="display-personal-info">
+                    <div class="profile-info-row">
+                        <div class="profile-info-label">Name</div>
+                        <div class="profile-info-value" id="profile-info-name">Pradeep Ravula</div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-label">Gender</div>
+                        <div class="profile-info-value" id="profile-info-gender">Male</div>
+                    </div>
                 </div>
-                <div class="profile-info-row">
-                    <div class="profile-info-label">Gender</div>
-                    <div class="profile-info-value">Male</div>
+                <div id="edit-personal-info" style="display:none;">
+                    <div class="form-group">
+                        <label for="editFullName">Full Name</label>
+                        <input type="text" id="editFullName" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="editFirstName">First Name</label>
+                        <input type="text" id="editFirstName" placeholder="Enter your first name">
+                    </div>
+                    <div class="form-group">
+                        <label for="editLastName">Last Name</label>
+                        <input type="text" id="editLastName" placeholder="Enter your last name">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Gender</label>
+                        <div class="radio-group">
+                            <input type="radio" id="editGenderMale" name="editGender" value="Male">
+                            <label for="editGenderMale">Male</label>
+                            <input type="radio" id="editGenderFemale" name="editGender" value="Female">
+                            <label for="editGenderFemale">Female</label>
+                        </div>
+                    </div>
+                    <button class="save-personal-info-btn">SAVE</button>
+                    <button class="cancel-personal-info-btn">CANCEL</button>
+                </div>
+                <h2>Email Address <a class="edit-link" href="#" data-section="email">Edit</a></h2>
+                <div id="display-email-info">
+                    <div class="profile-info-row">
+                        <div class="profile-info-label">Email</div>
+                        <div class="profile-info-value" id="profile-info-email">pradeep@example.com</div>
+                    </div>
+                </div>
+                <div id="edit-email-info" style="display:none;">
+                    <div class="form-group">
+                        <label for="editEmail">Email Address</label>
+                        <input type="email" id="editEmail" placeholder="Enter your email address">
+                    </div>
+                    <button class="save-email-btn">SAVE</button>
+                    <button class="cancel-email-btn">CANCEL</button>
+                </div>
+                <h2>Mobile Number <a class="edit-link" href="#" data-section="mobile">Edit</a></h2>
+                <div id="display-mobile-info">
+                    <div class="profile-info-row">
+                        <div class="profile-info-label">Mobile</div>
+                        <div class="profile-info-value" id="profile-info-mobile">+91 6303891189</div>
+                    </div>
+                </div>
+                <div id="edit-mobile-info" style="display:none;">
+                    <div class="form-group">
+                        <label for="editMobile">Mobile Number</label>
+                        <input type="text" id="editMobile" placeholder="Enter your mobile number">
+                    </div>
+                    <button class="save-mobile-btn">SAVE</button>
+                    <button class="cancel-mobile-btn">CANCEL</button>
                 </div>
             </section>
-            <section class="profile-section">
-                <h2>Email Address <a class="edit-link" href="#">Edit</a></h2>
-                <div class="profile-info-row">
-                    <div class="profile-info-label">Email</div>
-                    <div class="profile-info-value" id="profile-info-email">pradeep@example.com</div>
+            <section class="profile-section" id="manage-addresses-section" style="display:none;">
+                <h2>Manage Addresses</h2>
+                <div class="address-list">
+                    <p>No addresses saved. Add a new address to get started!</p>
+                </div>
+                <button class="add-new-address-btn" id="add-new-address-btn"><i class="fas fa-plus"></i> ADD A NEW ADDRESS</button>
+
+                <div class="new-address-form" id="new-address-form" style="display:none;">
+                    <h3>Add New Address</h3>
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input type="text" id="mobileNumber" placeholder="Enter your mobile number">
+                    </div>
+                    <div class="form-group">
+                        <label for="pinCode">Pincode</label>
+                        <input type="text" id="pinCode" placeholder="Enter Pincode">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address (House No., Building, Street, Area)</label>
+                        <textarea id="address" placeholder="Enter full address"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="locality">Locality / Town</label>
+                        <input type="text" id="locality" placeholder="Enter Locality or Town">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City / District</label>
+                        <input type="text" id="city" placeholder="Enter City or District">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" placeholder="Enter State">
+                    </div>
+                    <div class="form-group">
+                        <label>Address Type</label>
+                        <div class="radio-group">
+                            <input type="radio" id="home" name="addressType" value="Home">
+                            <label for="home">Home</label>
+                            <input type="radio" id="work" name="addressType" value="Work">
+                            <label for="work">Work</label>
+                        </div>
+                    </div>
+                    <button class="save-address-btn">SAVE ADDRESS</button>
+                    <button class="cancel-address-btn" id="cancel-address-btn">CANCEL</button>
                 </div>
             </section>
-            <section class="profile-section">
-                <h2>Mobile Number <a class="edit-link" href="#">Edit</a></h2>
-                <div class="profile-info-row">
-                    <div class="profile-info-label">Mobile</div>
-                    <div class="profile-info-value">+91 6303891189</div>
+            <section class="profile-section" id="pan-card-section" style="display:none;">
+                <h2>PAN Card Information</h2>
+                <p>No PAN card information available.</p>
+            </section>
+            <section class="profile-section" id="gift-cards-section" style="display:none;">
+                <h2>Gift Cards</h2>
+                <p>You have 20 gift cards.</p>
+
+                <div class="gift-card-header">
+                    <h3>ShopEasy Gift Card</h3>
+                    <div class="header-links">
+                        <a href="#">Buy a ShopEasy Gift Card</a>
+                        <a href="#">Check Gift Card Balance</a>
+                    </div>
+                </div>
+
+                <div class="add-gift-card-section">
+                    <button class="add-gift-card-btn"><i class="fas fa-plus"></i> ADD A GIFT CARD</button>
+                </div>
+
+                <div class="buy-gift-card-section">
+                    <h3>Buy a ShopEasy Gift Card
+                        <span class="issued-by">Issued by <a href="#">Quiksilver</a></span>
+                    </h3>
+                    <div class="gift-card-content">
+                        <div class="gift-card-form">
+                            <div class="tab-navigation">
+                                <button class="tab-link active">PERSONAL GIFT CARDS</button>
+                                <button class="tab-link">CORPORATE REQUIREMENTS</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="receiverEmail">Receiver's Email ID *</label>
+                                <input type="email" id="receiverEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="receiverName">Receiver's Name *</label>
+                                <input type="text" id="receiverName" required>
+                            </div>
+                            <div class="form-group half-width">
+                                <label for="cardValue">Card Value in ₹</label>
+                                <select id="cardValue">
+                                    <option>Select</option>
+                                    <option value="100">₹100</option>
+                                    <option value="250">₹250</option>
+                                    <option value="500">₹500</option>
+                                    <option value="1000">₹1000</option>
+                                </select>
+                            </div>
+                            <div class="form-group half-width">
+                                <label for="numOfCards">No of Cards</label>
+                                <input type="number" id="numOfCards" value="1" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="gifterName">Gifter's Name (Optional)</label>
+                                <input type="text" id="gifterName">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Write a message (Optional, 100 characters)</label>
+                                <textarea id="message" maxlength="100"></textarea>
+                            </div>
+                            <button class="buy-another-gift-card-btn"><i class="fas fa-plus"></i> Buy Another Gift Card</button>
+                        </div>
+                        <div class="gift-card-preview">
+                            <div class="gift-card-image">
+                                <img src="images/shopeasy_giftcard.png" alt="ShopEasy Gift Card">
+                                <div class="gift-card-value">₹0</div>
+                                <div class="gift-card-logo">ShopEasy</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="buy-gift-card-for-btn">BUY GIFT CARD FOR ₹0</button>
                 </div>
             </section>
-            <section class="faq-section">
+            <section class="profile-section" id="saved-upi-section" style="display:none;">
+                <h2>Saved UPI</h2>
+                <p>No UPI accounts saved.</p>
+            </section>
+            <section class="profile-section" id="saved-cards-section" style="display:none;">
+                <h2>Saved Cards</h2>
+                <p>No cards saved.</p>
+            </section>
+            <section class="profile-section" id="my-coupons-section" style="display:none;">
+                <h2>My Coupons</h2>
+                <p>You have no coupons.</p>
+            </section>
+            <section class="profile-section" id="my-reviews-ratings-section" style="display:none;">
+                <h2>My Reviews & Ratings</h2>
+                <p>You haven't reviewed any products yet.</p>
+            </section>
+            <section class="profile-section" id="all-notifications-section" style="display:none;">
+                <h2>All Notifications</h2>
+                <p>No new notifications.</p>
+            </section>
+            <section class="profile-section" id="my-wishlist-section" style="display:none;">
+                <h2>My Wishlist</h2>
+                <p>Your wishlist is empty.</p>
+            </section>
+            <section class="faq-section" id="faq-section" style="display:none;">
                 <h3>FAQs</h3>
                 <p><b>What happens when I update my email address (or mobile number)?</b></p>
                 <p>Your login email id (or mobile number) changes, likewise. You'll receive all your account related communication on your updated email address (or mobile number).</p>
+            </section>
+            <section class="account-actions" id="account-actions-section" style="display:none;">
+                <a href="#" class="action-link deactivate">Deactivate Account</a>
+                <a href="#" class="action-link delete">Delete Account</a>
+            </section>
+            <section class="profile-section" id="logout-section" style="display:none;">
+                <h2>Logout</h2>
+                <p>You have been successfully logged out.</p>
             </section>
         </main>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var user = localStorage.getItem('user');
-            var shortName = 'Guest';
-            var debugMsg = '';
+            var shortName = 'Pradeep';
+
+            let displayedName = 'Pradeep Ravula'; // Default for the "Name" field in Personal Information
+            let displayedEmail = 'pradeep@example.com'; // Default for "Email Address"
+            let displayedMobile = '+91 6303891189'; // Default for "Mobile Number"
+
             if (user) {
                 try {
                     var userObj = JSON.parse(user);
-                    // Use username or fallback to email
-                    var name = userObj.username || userObj.email || '';
-                    document.getElementById('profile-username').textContent = name || 'No Name';
-                    document.getElementById('profile-info-name').textContent = name || 'No Name';
-                    // Guess name logic
-                    if (name) {
-                        var guess = name;
-                        if (name.includes('@')) {
-                            guess = name.split('@')[0];
-                            debugMsg = 'Before @: ' + guess;
-                        }
-                        // Split by number or period
-                        var parts = guess.split(/\d+|\./).filter(Boolean);
-                        debugMsg += ' | Split: ' + JSON.stringify(parts);
-                        if (parts.length > 0) {
-                            // Pick the first meaningful word (letters only, min 2 chars)
-                            var firstWord = parts.find(w => /^[a-zA-Z]{2,}$/.test(w));
-                            if (firstWord) {
-                                shortName = firstWord;
-                                debugMsg += ' | First word: ' + firstWord;
-                            } else {
-                                shortName = parts[0];
-                                debugMsg += ' | Fallback to first part: ' + parts[0];
-                            }
-                        } else {
-                            shortName = guess.substring(0, 5);
-                            debugMsg += ' | Fallback to first 5 chars: ' + shortName;
-                        }
-                    } else {
-                        debugMsg = 'No username or email found.';
-                    }
-                    // Show only first 5 characters of email if available
+
+                    // Show full email for profile-info-email
                     if (userObj.email) {
-                        document.getElementById('profile-info-email').textContent = userObj.email.substring(0, 5);
+                        displayedEmail = userObj.email;
+                    } else {
+                        displayedEmail = 'N/A';
                     }
-                    // Always show the sample avatar
-                    document.getElementById('profile-avatar').src = 'images/avatar.png';
+
+                    // Retain existing mobile number or update if userObj.mobile exists
+                    if (userObj.mobile) {
+                        displayedMobile = `+91 ${userObj.mobile}`;
+                    } else {
+                        // Keep the hardcoded value if no mobile in localStorage
+                        displayedMobile = document.getElementById('profile-info-mobile').textContent || '+91 6303891189';
+                    }
+
                 } catch (e) {
-                    shortName = 'Error';
-                    debugMsg = 'Error parsing user: ' + e;
-                    document.getElementById('profile-username').textContent = 'Error';
-                    document.getElementById('profile-info-name').textContent = 'Error';
-                    document.getElementById('profile-info-email').textContent = 'Error';
+                    console.error('Error parsing user from localStorage:', e);
+                    // On error, revert to default values
+                    displayedEmail = 'Error';
+                    displayedMobile = 'Error';
                 }
-            } else {
-                debugMsg = 'No user in localStorage.';
+            } 
+            document.getElementById('profile-info-name').textContent = displayedName;
+            document.getElementById('profile-info-email').textContent = displayedEmail;
+            document.getElementById('profile-info-mobile').textContent = displayedMobile;
+            document.getElementById('greeting-username').textContent = shortName;
+            
+            // Always show the sample avatar
+            document.getElementById('profile-avatar').src = 'images/login.png';
+
+            // Personal Information Edit functionality
+            const displayPersonalInfo = document.getElementById('display-personal-info');
+            const editPersonalInfo = document.getElementById('edit-personal-info');
+            const editFirstNameInput = document.getElementById('editFirstName');
+            const editLastNameInput = document.getElementById('editLastName');
+            const savePersonalInfoBtn = document.querySelector('.save-personal-info-btn');
+            const cancelPersonalInfoBtn = document.querySelector('.cancel-personal-info-btn');
+            const editGenderMaleRadio = document.getElementById('editGenderMale');
+            const editGenderFemaleRadio = document.getElementById('editGenderFemale');
+
+            document.querySelector('a[data-section="personal-info"]').addEventListener('click', (e) => {
+                e.preventDefault();
+                // When editing, populate with the static values or current values for display
+                editFirstNameInput.value = 'Pradeep';
+                editLastNameInput.value = 'Ravula';
+                const currentGender = document.getElementById('profile-info-gender').textContent;
+                if (currentGender === 'Male') {
+                    editGenderMaleRadio.checked = true;
+                } else if (currentGender === 'Female') {
+                    editGenderFemaleRadio.checked = true;
+                }
+
+                displayPersonalInfo.style.display = 'none';
+                editPersonalInfo.style.display = 'block';
+            });
+
+            savePersonalInfoBtn.addEventListener('click', () => {
+                const newFirstName = editFirstNameInput.value.trim();
+                const newLastName = editLastNameInput.value.trim();
+                const newGender = document.querySelector('input[name="editGender"]:checked') ? document.querySelector('input[name="editGender"]:checked').value : '';
+
+                if (!newFirstName) {
+                    alert('First Name cannot be empty.');
+                    return;
+                }
+
+                // Keep these values static, do not update them from the form
+                // document.getElementById('profile-info-name').textContent = `${newFirstName} ${newLastName}`.trim();
+                // document.getElementById('profile-info-gender').textContent = newGender;
+                // document.getElementById('greeting-username').textContent = newFirstName; // Remove this line
+
+                document.getElementById('profile-info-gender').textContent = newGender; // Allow gender to be updated
+
+                alert("Personal information updated, but Name and Greeting will remain static."); // Inform user
+
+                displayPersonalInfo.style.display = 'block';
+                editPersonalInfo.style.display = 'none';
+            });
+
+            cancelPersonalInfoBtn.addEventListener('click', () => {
+                displayPersonalInfo.style.display = 'block';
+                editPersonalInfo.style.display = 'none';
+            });
+
+            // Email Address Edit functionality
+            const displayEmailInfo = document.getElementById('display-email-info');
+            const editEmailInfo = document.getElementById('edit-email-info');
+            const editEmailInput = document.getElementById('editEmail');
+            const saveEmailBtn = document.querySelector('.save-email-btn');
+            const cancelEmailBtn = document.querySelector('.cancel-email-btn');
+
+            document.querySelector('a[data-section="email"]').addEventListener('click', (e) => {
+                e.preventDefault();
+                editEmailInput.value = document.getElementById('profile-info-email').textContent;
+                displayEmailInfo.style.display = 'none';
+                editEmailInfo.style.display = 'block';
+            });
+
+            saveEmailBtn.addEventListener('click', () => {
+                const newEmail = editEmailInput.value.trim();
+                if (!newEmail || !/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(newEmail)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+                document.getElementById('profile-info-email').textContent = newEmail;
+                // document.getElementById('greeting-username').textContent = newEmail.split('@')[0]; // Removed for static greeting
+                displayEmailInfo.style.display = 'block';
+                editEmailInfo.style.display = 'none';
+            });
+
+            cancelEmailBtn.addEventListener('click', () => {
+                displayEmailInfo.style.display = 'block';
+                editEmailInfo.style.display = 'none';
+            });
+
+            // Mobile Number Edit functionality
+            const displayMobileInfo = document.getElementById('display-mobile-info');
+            const editMobileInfo = document.getElementById('edit-mobile-info');
+            const editMobileInput = document.getElementById('editMobile');
+            const saveMobileBtn = document.querySelector('.save-mobile-btn');
+            const cancelMobileBtn = document.querySelector('.cancel-mobile-btn');
+
+            document.querySelector('a[data-section="mobile"]').addEventListener('click', (e) => {
+                e.preventDefault();
+                editMobileInput.value = document.getElementById('profile-info-mobile').textContent.replace('+91 ', ''); // Assuming +91 prefix
+                displayMobileInfo.style.display = 'none';
+                editMobileInfo.style.display = 'block';
+            });
+
+            saveMobileBtn.addEventListener('click', () => {
+                const newMobile = editMobileInput.value.trim();
+                if (!newMobile || !/^[0-9]{10}$/.test(newMobile)) {
+                    alert('Please enter a valid 10-digit mobile number.');
+                    return;
+                }
+                document.getElementById('profile-info-mobile').textContent = `+91 ${newMobile}`;
+                displayMobileInfo.style.display = 'block';
+                editMobileInfo.style.display = 'none';
+            });
+
+            cancelMobileBtn.addEventListener('click', () => {
+                displayMobileInfo.style.display = 'block';
+                editMobileInfo.style.display = 'none';
+            });
+
+            // Logout confirmation
+            document.querySelector('a[data-target="logout-section"]').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (confirm('Are you sure you want to logout?')) {
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Initial call to set up sections on page load
+            const initialActiveLink = document.querySelector('.sidebar nav a.active');
+            if (initialActiveLink) {
+                const initialTargetId = initialActiveLink.getAttribute('data-target');
+                if (initialTargetId) {
+                    const profileSections = document.querySelectorAll('.profile-content section');
+                    profileSections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    document.getElementById(initialTargetId).style.display = 'block';
+                }
             }
-            document.getElementById('profile-shortname').textContent = shortName;
-            document.getElementById('debug-shortname').textContent = debugMsg;
-            // Debug output
-            console.log('User for shortcut:', user, 'Shortname:', shortName, 'Debug:', debugMsg);
+
+            // Gift Cards Section functionality
+            const addGiftCardBtn = document.querySelector('.add-gift-card-btn');
+            const buyGiftCardSection = document.querySelector('.buy-gift-card-section');
+            const cardValueSelect = document.getElementById('cardValue');
+            const giftCardValueDisplay = document.querySelector('.gift-card-preview .gift-card-value');
+            const buyGiftCardForBtn = document.querySelector('.buy-gift-card-for-btn');
+            const tabLinks = document.querySelectorAll('.tab-navigation .tab-link');
+
+            // Initial state for buyGiftCardSection (hidden by default if not needed)
+            if (buyGiftCardSection) {
+                buyGiftCardSection.style.display = 'block'; // Show by default as per screenshot
+            }
+            if (addGiftCardBtn) {
+                addGiftCardBtn.style.display = 'none'; // Hide add button if buy section is visible
+            }
+
+            if (cardValueSelect && giftCardValueDisplay) {
+                cardValueSelect.addEventListener('change', () => {
+                    giftCardValueDisplay.textContent = `₹${cardValueSelect.value}`; 
+                    buyGiftCardForBtn.textContent = `BUY GIFT CARD FOR ₹${cardValueSelect.value}`; 
+                });
+                // Set initial value on load
+                cardValueSelect.dispatchEvent(new Event('change'));
+            }
+
+            // Tab navigation for gift cards (basic implementation for now)
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    tabLinks.forEach(tab => tab.classList.remove('active'));
+                    e.target.classList.add('active');
+                    // Future: Add logic here to show/hide different form content based on tab
+                });
+            });
+
+            if (buyGiftCardForBtn) {
+                buyGiftCardForBtn.addEventListener('click', () => {
+                    const receiverEmail = document.getElementById('receiverEmail');
+                    const receiverName = document.getElementById('receiverName');
+                    const cardValue = cardValueSelect.value;
+
+                    if (!receiverEmail.value.trim() || !receiverName.value.trim() || cardValue === 'Select') {
+                        alert("Please fill in all required fields (Receiver's Email, Receiver's Name, Card Value).");
+                        return;
+                    }
+                    if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(receiverEmail.value.trim())) {
+                        alert('Please enter a valid email address for the receiver.');
+                        return;
+                    }
+                    alert(`Buying ShopEasy Gift Card for ₹${cardValue} to ${receiverName.value} (${receiverEmail.value}). Functionality coming soon!`);
+                    // In a real application, you'd send this data to a server
+                });
+            }
+        });
+
+        // Navigation functionality (defined once at global scope)
+        // This part needs to be outside DOMContentLoaded to be globally accessible
+        // and avoid re-attaching listeners, or ensure it's only attached once.
+        // Keeping it here for now as previous edits put it here, but ideally should be managed better.
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('data-target');
+                
+                // Hide all sections
+                document.querySelectorAll('.profile-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show target section
+                document.getElementById(targetId).style.display = 'block';
+                
+                // Update active state
+                document.querySelectorAll('.sidebar nav a').forEach(a => a.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        // Profile picture upload
+        const profileAvatar = document.getElementById('profile-avatar');
+        profileAvatar.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        profileAvatar.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        });
+
+        // Address form validation and handling
+        const addNewAddressBtn = document.getElementById('add-new-address-btn');
+        const newAddressForm = document.getElementById('new-address-form');
+        const cancelAddressBtn = document.getElementById('cancel-address-btn');
+        const saveAddressBtn = document.querySelector('.save-address-btn');
+        const addressList = document.querySelector('.address-list');
+
+        addNewAddressBtn.addEventListener('click', () => {
+            newAddressForm.style.display = 'block';
+        });
+
+        cancelAddressBtn.addEventListener('click', () => {
+            newAddressForm.style.display = 'none';
+            // Clear form fields when cancelling
+            const requiredFields = ['fullName', 'mobileNumber', 'pinCode', 'address', 'locality', 'city', 'state'];
+            requiredFields.forEach(field => {
+                document.getElementById(field).value = '';
+                document.getElementById(field).style.borderColor = '';
+            });
+            const checkedRadio = document.querySelector('input[name="addressType"]:checked');
+            if (checkedRadio) {
+                checkedRadio.checked = false;
+            }
+            newAddressForm.removeAttribute('data-editing-address');
+        });
+
+        saveAddressBtn.addEventListener('click', () => {
+            const requiredFields = ['fullName', 'mobileNumber', 'pinCode', 'address', 'locality', 'city', 'state'];
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = 'red';
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+
+            if (!isValid) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Validate mobile number
+            const mobileNumber = document.getElementById('mobileNumber').value;
+            if (!/^[0-9]{10}$/.test(mobileNumber)) {
+                alert('Please enter a valid 10-digit mobile number.');
+                document.getElementById('mobileNumber').style.borderColor = 'red';
+                return;
+            } else {
+                document.getElementById('mobileNumber').style.borderColor = '';
+            }
+
+            // Validate pincode
+            const pinCode = document.getElementById('pinCode').value;
+            if (!/^[0-9]{6}$/.test(pinCode)) {
+                alert('Please enter a valid 6-digit pincode.');
+                document.getElementById('pinCode').style.borderColor = 'red';
+                return;
+            } else {
+                document.getElementById('pinCode').style.borderColor = '';
+            }
+
+            const editingIndex = newAddressForm.dataset.editingAddress;
+            if (editingIndex !== undefined) {
+                // Editing existing address
+                const addressItemToEdit = addressList.children[parseInt(editingIndex)];
+                addressItemToEdit.querySelector('h3').textContent = document.getElementById('fullName').value;
+                const paragraphs = addressItemToEdit.querySelectorAll('p');
+                paragraphs[0].textContent = document.getElementById('address').value;
+                paragraphs[1].textContent = `${document.getElementById('locality').value}, ${document.getElementById('city').value}`;
+                paragraphs[2].textContent = `${document.getElementById('state').value} - ${document.getElementById('pinCode').value}`;
+                paragraphs[3].textContent = `Mobile: ${document.getElementById('mobileNumber').value}`;
+            } else {
+                // Adding new address
+                const newAddress = document.createElement('div');
+                newAddress.className = 'address-item';
+                newAddress.innerHTML = `
+                    <h3>${document.getElementById('fullName').value}</h3>
+                    <p>${document.getElementById('address').value}</p>
+                    <p>${document.getElementById('locality').value}, ${document.getElementById('city').value}</p>
+                    <p>${document.getElementById('state').value} - ${document.getElementById('pinCode').value}</p>
+                    <p>Mobile: ${document.getElementById('mobileNumber').value}</p>
+                    <div class="address-actions">
+                        <button class="edit-address-btn">Edit</button>
+                        <button class="delete-address-btn">Delete</button>
+                    </div>
+                `;
+                addressList.appendChild(newAddress);
+
+                // Add event listeners for the new buttons immediately
+                newAddress.querySelector('.edit-address-btn').addEventListener('click', (e) => {
+                    const addressItem = e.target.closest('.address-item');
+                    // Extract current address details
+                    const currentName = addressItem.querySelector('h3').textContent;
+                    const paragraphs = addressItem.querySelectorAll('p');
+                    const currentAddressLine1 = paragraphs[0].textContent;
+                    const currentLocalityCity = paragraphs[1].textContent.split(', ');
+                    const currentLocality = currentLocalityCity[0];
+                    const currentCity = currentLocalityCity[1];
+                    const currentStatePincode = paragraphs[2].textContent.split(' - ');
+                    const currentState = currentStatePincode[0];
+                    const currentPincode = currentStatePincode[1];
+                    const currentMobile = paragraphs[3].textContent.replace('Mobile: ', '');
+
+                    // Populate the form
+                    document.getElementById('fullName').value = currentName;
+                    document.getElementById('mobileNumber').value = currentMobile;
+                    document.getElementById('pinCode').value = currentPincode;
+                    document.getElementById('address').value = currentAddressLine1;
+                    document.getElementById('locality').value = currentLocality;
+                    document.getElementById('city').value = currentCity;
+                    document.getElementById('state').value = currentState;
+
+                    // Store a reference to the address item being edited
+                    newAddressForm.dataset.editingAddress = Array.from(addressList.children).indexOf(addressItem);
+                    newAddressForm.style.display = 'block';
+                });
+
+                newAddress.querySelector('.delete-address-btn').addEventListener('click', (e) => {
+                    if (confirm('Are you sure you want to delete this address?')) {
+                        e.target.closest('.address-item').remove();
+                        if (addressList.children.length === 0) {
+                            document.querySelector('.address-list p').style.display = 'block';
+                        }
+                    }
+                });
+            }
+
+            newAddressForm.style.display = 'none';
+            if (addressList.children.length > 0) {
+                document.querySelector('.address-list p').style.display = 'none';
+            } else {
+                document.querySelector('.address-list p').style.display = 'block';
+            }
+            // Clear form fields and editing state
+            requiredFields.forEach(field => {
+                document.getElementById(field).value = '';
+                document.getElementById(field).style.borderColor = '';
+            });
+            const checkedRadio = document.querySelector('input[name="addressType"]:checked');
+            if (checkedRadio) {
+                checkedRadio.checked = false;
+            }
+            newAddressForm.removeAttribute('data-editing-address');
         });
     </script>
 </body>
