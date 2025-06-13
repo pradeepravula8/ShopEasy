@@ -511,65 +511,62 @@ footer {
 
 /* Main Banner Slider - Uniform Image Height */
 .main-banner-slider {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto 24px auto;
     position: relative;
-    background: #e9eef6;
-    border-radius: 8px;
+    width: 100%;
+    height: 400px;
     overflow: hidden;
-    min-height: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
+
+.banner-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 #mainBannerImg {
     width: 100%;
-    max-width: 100%;
-    height: 320px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 8px;
-    background: #e9eef6;
-    display: block;
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* Remove .banner-caption styles if present */
-.banner-caption { display: none !important; }
-
-@media (max-width: 768px) {
-    .main-banner-slider {
-        min-height: 180px;
-    }
-    #mainBannerImg {
-        height: 180px;
-    }
+.banner-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .main-banner-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255,255,255,0.8);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
     border: none;
-    border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    font-size: 36px;
-    color: #333;
+    padding: 15px;
     cursor: pointer;
+    font-size: 24px;
     z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.main-banner-arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .main-banner-arrow.left {
-    left: 24px;
-    right: auto;
+    left: 10px;
 }
+
 .main-banner-arrow.right {
-    right: 24px;
-    left: auto;
+    right: 10px;
 }
 
 .toast {
@@ -593,4 +590,526 @@ footer {
 .toast.show {
     opacity: 1;
     top: 56px;
+}
+
+.sidebar nav a.active, .sidebar nav a:hover {
+    background: #e3e6ef;
+    border-left: 4px solid #2874f0;
+    color: #1856a7;
+}
+.sidebar .nav-section-title {
+    display: flex;
+    align-items: center;
+    padding: 14px 32px;
+    color: #878787;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.sidebar .nav-section-title i {
+    margin-right: 10px;
+    color: #2874f0;
+}
+
+.gift-card-count {
+    background-color: #ffe500;
+    color: #212121;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-left: auto;
+}
+
+.profile-content {
+    flex: 1;
+    padding: 48px 56px;
+}
+.profile-section {
+    margin-bottom: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px 30px;
+    background-color: #fff;
+}
+.profile-section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #212121;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.profile-info-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 18px;
+    align-items: center;
+}
+.profile-info-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.profile-info-item label {
+    font-size: 13px;
+    color: #878787;
+    margin-bottom: 5px;
+}
+.profile-info-item input[type="text"],
+.profile-info-item input[type="email"],
+.profile-info-item input[type="tel"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.profile-info-item input[type="text"]:focus,
+.profile-info-item input[type="email"]:focus,
+.profile-info-item input[type="tel"]:focus {
+    border-color: #2874f0;
+}
+.profile-info-item.full-width {
+    flex: none;
+    width: 100%;
+}
+.profile-info-label {
+    width: 160px;
+    color: #878787;
+    font-size: 15px;
+    font-weight: 500;
+}
+.profile-info-value {
+    font-size: 16px;
+    color: #212121;
+    font-weight: 400;
+    display: flex;
+    gap: 20px; /* Space between radio buttons */
+}
+/* Custom Radio Button Styles */
+.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+.radio-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.radio-container input:checked ~ .checkmark {
+    background-color: #2874f0;
+    border: 1px solid #2874f0;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.radio-container .checkmark:after {
+    top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.edit-link {
+    color: #2874f0;
+    font-size: 14px;
+    margin-left: 12px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.edit-link:hover {
+    text-decoration: underline;
+}
+.faq-section {
+    margin-top: 48px;
+    margin-bottom: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px 30px;
+    background-color: #fff;
+}
+.faq-section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #212121;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.faq-section p {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+.faq-section p:last-child {
+    margin-bottom: 0;
+}
+.account-actions {
+    margin-top: 30px;
+    padding: 20px 30px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.account-actions .action-link {
+    color: #2874f0;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 15px;
+}
+.account-actions .action-link.deactivate {
+    color: #f00;
+}
+.account-actions .action-link.delete {
+    color: #f00;
+}
+.account-actions .action-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .profile-container { flex-direction: column; }
+    .sidebar { width: 100%; border-radius: 8px 8px 0 0; }
+    .profile-content { padding: 32px 16px; }
+    .profile-info-row { flex-direction: column; align-items: flex-start; }
+    .profile-info-label { width: 100%; margin-bottom: 5px; }
+    .profile-info-value { flex-direction: column; align-items: flex-start; }
+}
+
+.add-new-address-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px solid #e3e6ef;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #2874f0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+}
+
+.add-new-address-btn:hover {
+    background-color: #e3e6ef;
+}
+
+.add-new-address-btn i {
+    font-size: 16px;
+}
+
+.new-address-form {
+    border: 1px solid #e3e6ef;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 30px;
+    background-color: #fff;
+}
+
+.new-address-form h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #212121;
+}
+
+.new-address-form .form-group {
+    margin-bottom: 20px;
+}
+
+.new-address-form .form-group label {
+    display: block;
+    font-size: 14px;
+    color: #878787;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.new-address-form .form-group input[type="text"],
+.new-address-form .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e3e6ef;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #212121;
+    outline: none;
+}
+
+.new-address-form .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.new-address-form .form-group input[type="text"]:focus,
+.new-address-form .form-group textarea:focus {
+    border-color: #2874f0;
+    box-shadow: 0 0 0 2px rgba(40, 116, 240, 0.2);
+}
+
+.new-address-form .radio-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.new-address-form .radio-group input[type="radio"] {
+    margin-right: 8px;
+}
+
+.new-address-form .save-address-btn,
+.new-address-form .cancel-address-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+}
+
+.new-address-form .save-address-btn {
+    background-color: #2874f0;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.new-address-form .save-address-btn:hover {
+    background-color: #1856a7;
+}
+
+.new-address-form .cancel-address-btn {
+    background-color: #f0f0f0;
+    color: #555;
+}
+
+.new-address-form .cancel-address-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.address-list {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #e3e6ef;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.address-list p {
+    color: #555;
+    font-size: 15px;
+}
+
+.address-card {
+    border: 1px solid #e3e6ef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    position: relative;
+}
+
+.address-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #212121;
+}
+
+.address-card p {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.address-actions {
+    margin-top: 15px;
+}
+
+.address-actions button {
+    background: none;
+    border: 1px solid #2874f0;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    color: #2874f0;
+    margin-right: 10px;
+}
+
+.address-actions button:hover {
+    background-color: #2874f0;
+    color: #fff;
+}
+
+.address-actions button.delete-address-btn {
+    border-color: #e53935;
+    color: #e53935;
+}
+
+.address-actions button.delete-address-btn:hover {
+    background-color: #e53935;
+    color: #fff;
+}
+
+/* Gift Card Section */
+.gift-card-content {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+    align-items: flex-start; /* Align items to the top */
+    justify-content: space-between; /* Distribute space between form and image */
+}
+
+.gift-card-form {
+    flex: 1; /* Allow it to grow and shrink to fill remaining space */
+    min-width: 350px; /* A reasonable minimum width for the form fields */
+    position: relative;
+    z-index: 0;
+}
+
+.gift-card-form .form-group {
+    margin-bottom: 15px;
+}
+
+.gift-card-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+.gift-card-form input[type="email"],
+.gift-card-form input[type="text"],
+.gift-card-form input[type="number"],
+.gift-card-form select,
+.gift-card-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.gift-card-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.gift-card-form .form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.gift-card-form .form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.gift-card-preview {
+    width: 350px; /* Adjusted width to prevent overlap */
+    height: 210px; /* Adjusted height to prevent overlap */
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none; /* Ensure no background */
+    border: none; /* Ensure no border */
+    padding: 0;
+    position: relative;
+    z-index: 0; /* Ensure form elements are on top */
+    margin: auto;
+    transform: none;
+    border-radius: 0; /* Ensure no border-radius */
+    box-shadow: none; /* Ensure no box-shadow */
+}
+
+.gift-card-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.gift-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensure image is contained and not distorted */
+    transform: none;
+}
+
+.gift-card-value {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.gift-card-logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 } 
