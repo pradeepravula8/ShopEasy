@@ -605,19 +605,21 @@
                                 <label for="receiverName">Receiver's Name *</label>
                                 <input type="text" id="receiverName" required>
                             </div>
-                            <div class="form-group half-width">
-                                <label for="cardValue">Card Value in ₹</label>
-                                <select id="cardValue">
-                                    <option>Select</option>
-                                    <option value="100">₹100</option>
-                                    <option value="250">₹250</option>
-                                    <option value="500">₹500</option>
-                                    <option value="1000">₹1000</option>
-                                </select>
-                            </div>
-                            <div class="form-group half-width">
-                                <label for="numOfCards">No of Cards</label>
-                                <input type="number" id="numOfCards" value="1" min="1">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cardValue">Card Value in ₹</label>
+                                    <select id="cardValue">
+                                        <option>Select</option>
+                                        <option value="100">₹100</option>
+                                        <option value="250">₹250</option>
+                                        <option value="500">₹500</option>
+                                        <option value="1000">₹1000</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="numOfCards">No of Cards</label>
+                                    <input type="number" id="numOfCards" value="1" min="1">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="gifterName">Gifter's Name (Optional)</label>
@@ -631,9 +633,8 @@
                         </div>
                         <div class="gift-card-preview">
                             <div class="gift-card-image">
-                                <img src="images/shopeasy_giftcard.png" alt="ShopEasy Gift Card">
-                                <div class="gift-card-value">₹0</div>
-                                <div class="gift-card-logo">ShopEasy</div>
+                                <img src="images/img.png" alt="ShopEasy Gift Card">
+                                <div class="gift-card-value" id="displayedCardValue">₹0</div>
                             </div>
                         </div>
                     </div>
